@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<!-- Enable AspectJ style of Spring AOP -->
+	<aop:aspectj-autoproxy />
+
+
+	<!-- Configure Employee Bean and initialize it -->
+	<bean name="employee" class="com.springAOP.demoAOP.model.Employee">
+		<property name="name" value="Dummy Name"></property>
+	</bean>
+
+	<!-- Configure EmployeeService bean -->
+	<bean name="employeeService"
+		class="com.springAOP.demoAOP.service.EmployeeService">
+		<property name="employee" ref="employee"></property>
+	</bean>
+
+	<!-- Configure Aspect Beans, without this Aspects advices wont execute -->	
+	<bean name="employeeAspect"
+		class="com.springAOP.demoAOP.aspect.EmployeeAspect">
+	</bean>		
+	<bean name="employeeAspectPointCut"
+		class="com.springAOP.demoAOP.aspect.EmployeeAspectPointcut">
+	</bean>
+	<bean name="employeeAspectJoinPoint"
+		class="com.springAOP.demoAOP.aspect.EmployeeAspectJoinPoint">
+	</bean>
+	<bean name="employeeAfterAspect"
+		class="com.springAOP.demoAOP.aspect.EmployeeAfterAspect">
+	</bean>
+	<bean name="employeeAroundAspect"
+		class="com.springAOP.demoAOP.aspect.EmployeeAroundAspect">
+	</bean>
+	
+	<bean name="employeeAnnotationAspect"
+		class="com.springAOP.demoAOP.aspect.EmployeeAnnotationAspect">
+	</bean>
+	<bean name="employeeXMLConfigAspect"
+		class="com.springAOP.demoAOP.aspect.EmployeeXMLConfigAspect">
+	</bean>
+	
+<!-- 	<aop:config> -->
+<!-- 		<aop:aspect ref="employeeXMLConfigAspect" -->
+<!-- 			id="employeeXMLConfigAspectID" order="1"> -->
+<!-- 		<aop:pointcut -->
+<!-- 			expression="execution(* com.springAOP.demoAOP.model.Employee.getName())" -->
+<!-- 			id="getNamePointcut" /> -->
+<!-- 		<aop:around method="employeeAroundAdvice" -->
+<!-- 	pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
+</beans>
